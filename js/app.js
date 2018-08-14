@@ -9,11 +9,10 @@
 // The names and URLs to all of the feeds we'd like available.
 var allFeeds = [
     {
-        //name: 'Udacity Blog',
+        name: 'Udacity Blog',
         url: 'http://blog.udacity.com/feed'
     }, {
-        //name: 'CSS Tricks',
-        name: '',
+        name: 'CSS Tricks',
         url: 'http://feeds.feedburner.com/CssTricks'
     }, {
         name: 'HTML5 Rocks',
