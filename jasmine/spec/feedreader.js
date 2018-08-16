@@ -1,8 +1,8 @@
 
 $(function() {
 
-    describe('RSS Feeds', function() {
-        it('are defined', function() {
+    describe('RSS Feeds', function() { //This test suite was given as starter code
+        it('are defined', function() { //part of starter code and mimiced for test comprosing the rest of the suite
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -45,26 +45,22 @@ $(function() {
            expect(feed.length).not.toBeNull(); //Tests that there is at least a single entry
          });
     });
-    describe ('New Feed Selection', function() {
+    describe ('New Feed Selection', function() { //Required test suite
         const feed = document.querySelector('.feed');
-        initialFeed = [];
-        nextFeed = [];
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+        initialFeed = []; //creates empty array into which to push the initial feed: see line 54
+        nextFeed = []; //creates empty array into which to push the next feed: see line 59
          beforeEach(function(done) { //writes code that will run loadFeed before the expect test
              loadFeed(0); //followed Jasmine documentation for asynchronous work
-             initialFeed.push(feed);
+             initialFeed.push(feed); //This pushes the first feed into an empty array
              done();
          });
          afterEach(function(done) { //writes code that will run loadFeed before the expect test
              loadFeed(1); //followed Jasmine documentation for asynchronous work
-             nextFeed.push(feed);
+             nextFeed.push(feed); // This pushes the second feed into another array
              done();
          });
          it('content actually changes', function() {
-           expect(initialFeed).not.toEqual(nextFeed);
+           expect(initialFeed).not.toEqual(nextFeed); //This expectation compares the feed in the first array to the feed in the second. If they are not the same the test is green
          });
     });
 }());
