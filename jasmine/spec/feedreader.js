@@ -1,6 +1,6 @@
 
 $(function () {
-
+  let feed = document.querySelector('.feed');
 	describe('RSS Feeds', function () { //This test suite was given as starter code
 		it('are defined', function () { //part of starter code and mimiced for test comprosing the rest of the suite
 			expect(allFeeds).toBeDefined();
@@ -20,12 +20,11 @@ $(function () {
 		});
 	});
 	describe('The menu', function () { //established test suite and follows the format of 'RSS feeds' from line 16
-		it('is hidden by default', function () { //first test required as #11 to complete project
-			const menu = document.querySelector('body'); //identifies DOM element from index.html
+      const menu = document.querySelector('body'); //identifies DOM element from index.html
+    it('is hidden by default', function () { //first test required as #11 to complete project
 			expect(menu.classList.contains('menu-hidden')).toBe(true); //places boolean value of true on hidden menu
 		});
 		it('the menu changes visibility when clicked', function () { //writes changes value for test
-			const menu = document.querySelector('body');
 			const menu__link = document.querySelector('.menu-icon-link');
 			menu__link.click(); //listens for click on DOM element of menu-icon-link index.html line 22
 			expect(menu.classList.contains('menu-hidden')).toBe(false); //tests for changes in boolean value
@@ -33,31 +32,26 @@ $(function () {
 			expect(menu.classList.contains('menu-hidden')).toBe(true);
 		});
 	});
-
-	/* TODO: Write a new test suite named "Initial Entries" */
 	describe('Initial Entries', function () { //creates test suite
 		beforeEach(function (done) { //writes code that will run loadFeed before the expect test
-			loadFeed(0); //followed Jasmine documentation for asynchronous work
-			done();
+			loadFeed(0, done); //followed Jasmine documentation for asynchronous work
 		});
 		it('load complete with at least single entry', function () { //test that expects that when the entries load the number loaded will be greater than 0
-			const feed = document.querySelector('.feed');
-			expect(feed.length).not.toBeNull(); //Tests that there is at least a single entry
+			expect(feed.length < 0).toBe(false); //Tests that there is at least a single entry
 		});
 	});
 	describe('New Feed Selection', function () { //Required test suite
-		const feed = document.querySelector('.feed');
 		initialFeed = []; //creates empty array into which to push the initial feed: see line 54
 		nextFeed = []; //creates empty array into which to push the next feed: see line 59
 		beforeEach(function (done) { //writes code that will run loadFeed before the expect test
-			loadFeed(0); //followed Jasmine documentation for asynchronous work
-			initialFeed.push(feed); //This pushes the first feed into an empty array
-			done();
-		});
-		afterEach(function (done) { //writes code that will run loadFeed before the expect test
-			loadFeed(1); //followed Jasmine documentation for asynchronous work
-			nextFeed.push(feed); // This pushes the second feed into another array
-			done();
+			loadFeed(0, function() { //followed Jasmine documentation for asynchronous work
+			initialFeed.push(feed.children[0].innerText); //This pushes the first feed into an empty array
+      callback();
+      });
+        loadFeed(1, function() { //followed Jasmine documentation for asynchronous work
+			  nextFeed.push(feed.children[0].innerText); // This pushes the second feed into another array
+        });
+      done();
 		});
 		it('content actually changes', function () {
 			expect(initialFeed).not.toEqual(nextFeed); //This expectation compares the feed in the first array to the feed in the second. If they are not the same the test is green
