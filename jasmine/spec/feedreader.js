@@ -46,12 +46,11 @@ $(function () {
 		beforeEach(function (done) { //writes code that will run loadFeed before the expect test
 			loadFeed(0, function() { //followed Jasmine documentation for asynchronous work
 			initialFeed.push(feed.children[0].innerText); //This pushes the first feed into an empty array
-      callback();
       });
-        loadFeed(1, function() { //followed Jasmine documentation for asynchronous work
+        loadFeed(1, function() { //followed callback article from codeburst.io per instructions from first reviewer
 			  nextFeed.push(feed.children[0].innerText); // This pushes the second feed into another array
+        done();
         });
-      done();
 		});
 		it('content actually changes', function () {
 			expect(initialFeed).not.toEqual(nextFeed); //This expectation compares the feed in the first array to the feed in the second. If they are not the same the test is green
